@@ -1,5 +1,4 @@
-# Create the manifest.json for PWA
-manifest_content = '''{
+{
   "name": "Nota Service HP Pro",
   "short_name": "NotaService",
   "description": "Sistem Manajemen Service HP Profesional dengan Cloud Sync",
@@ -70,9 +69,4 @@ manifest_content = '''{
       "form_factor": "wide"
     }
   ]
-}'''
-
-with open('/mnt/kimi/output/manifest.json', 'w', encoding='utf-8') as f:
-    f.write(manifest_content)
-
-print("✅ manifest.json created")
+}
