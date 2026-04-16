@@ -1,10 +1,10 @@
 const CACHE_NAME = 'nota-service-v2.0';
 const STATIC_ASSETS = [
-  '/nota-service-pwa/',
-  '/nota-service-pwa/index.html',
-  '/nota-service-pwa/manifest.json',
-  '/nota-service-pwa/icon-192.png',
-  '/nota-service-pwa/icon-512.png'
+  '/nota-service-pwa-cloud/',
+  '/nota-service-pwa-cloud/index.html',
+  '/nota-service-pwa-cloud/manifest.json',
+  '/nota-service-pwa-cloud/icon-192.png',
+  '/nota-service-pwa-cloud/icon-512.png'
 ];
 
 // Install event - cache static assets
@@ -98,7 +98,7 @@ self.addEventListener('fetch', (event) => {
             console.error('[SW] Fetch failed:', error);
             // Return offline fallback if available
             if (event.request.mode === 'navigate') {
-              return caches.match('/nota-service-pwa/index.html');
+              return caches.match('/nota-service-pwa-cloud/index.html');
             }
             throw error;
           });
@@ -131,8 +131,8 @@ self.addEventListener('push', (event) => {
     event.waitUntil(
       self.registration.showNotification(data.title || 'Nota Service', {
         body: data.body || 'Ada notifikasi baru',
-        icon: '/nota-service-pwa/icon-192.png',
-        badge: '/nota-service-pwa/icon-72.png',
+        icon: '/nota-service-pwa-cloud/icon-192.png',
+        badge: '/nota-service-pwa-cloud/icon-72.png',
         data: data.data || {},
         requireInteraction: true,
         actions: [
@@ -156,7 +156,7 @@ self.addEventListener('notificationclick', (event) => {
 
   if (event.action === 'open' || !event.action) {
     event.waitUntil(
-      self.clients.openWindow('/nota-service-pwa/')
+      self.clients.openWindow('/nota-service-pwa-cloud/')
     );
   }
 });
