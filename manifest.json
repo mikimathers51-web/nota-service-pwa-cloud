@@ -2,12 +2,12 @@
   "name": "Nota Service HP Pro",
   "short_name": "NotaService",
   "description": "Sistem Manajemen Service HP Profesional dengan Cloud Sync",
-  "start_url": "/nota-service-pwa/",
+  "start_url": "/nota-service-pwa-cloud/",
   "display": "standalone",
   "background_color": "#667eea",
   "theme_color": "#667eea",
   "orientation": "portrait",
-  "scope": "/nota-service-pwa/",
+  "scope": "/nota-service-pwa-cloud/",
   "icons": [
     {
       "src": "icon-72.png",
