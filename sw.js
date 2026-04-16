@@ -1,5 +1,4 @@
-# Create the Service Worker (sw.js) for offline support
-sw_content = '''const CACHE_NAME = 'nota-service-v2.0';
+const CACHE_NAME = 'nota-service-v2.0';
 const STATIC_ASSETS = [
   '/nota-service-pwa/',
   '/nota-service-pwa/index.html',
@@ -53,7 +52,7 @@ self.addEventListener('fetch', (event) => {
   if (!event.request.url.startsWith(self.location.origin)) {
     return;
   }
-  
+
   // Skip non-GET requests
   if (event.request.method !== 'GET') {
     return;
@@ -76,23 +75,23 @@ self.addEventListener('fetch', (event) => {
             .catch(() => {
               // Network failed, but we have cached version
             });
-          
+
           return cachedResponse;
         }
-        
+
         // Not in cache, fetch from network
         return fetch(event.request)
           .then((networkResponse) => {
             if (!networkResponse || networkResponse.status !== 200) {
               return networkResponse;
             }
-            
+
             // Cache the new response
             const responseToCache = networkResponse.clone();
             caches.open(CACHE_NAME).then((cache) => {
               cache.put(event.request, responseToCache);
             });
-            
+
             return networkResponse;
           })
           .catch((error) => {
@@ -154,7 +153,7 @@ self.addEventListener('push', (event) => {
 // Notification click handler
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
-  
+
   if (event.action === 'open' || !event.action) {
     event.waitUntil(
       self.clients.openWindow('/nota-service-pwa/')
@@ -168,9 +167,3 @@ self.addEventListener('message', (event) => {
     self.skipWaiting();
   }
 });
-'''
-
-with open('/mnt/kimi/output/sw.js', 'w', encoding='utf-8') as f:
-    f.write(sw_content)
-
-print("✅ sw.js (Service Worker) created")
